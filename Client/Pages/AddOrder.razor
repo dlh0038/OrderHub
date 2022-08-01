@@ -1,0 +1,62 @@
+@page "/addorder"
+@using OrderHub.Shared.Models
+@inject HttpClient service
+@inject NavigationManager NavigationManager
+@inject IJSRuntime js
+
+<h3>Create</h3>
+<hr />
+<EditForm Model="@order" OnValidSubmit="SaveOrder">
+    <DataAnnotationsValidator />
+    
+    <div class="mb-3">
+        <label for="Price" class="form-label">Price</label>
+        <div class="col-md-4">
+            <InputNumber class="form-control" @bind-Value="order.Price" />
+        </div>
+        <!-- <ValidationMessage For="@(() => user.Address)" /> -->
+    </div>
+    <div class="mb-3">
+        <label for="Description" class="form-label">Description</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="order.Description" />
+        </div>
+        <!-- <ValidationMessage For="@(() => user.Cellnumber)" /> -->
+    </div>
+    <div class="mb-3">
+        <label for="Quantity" class="form-label">Rating</label>
+        <div class="col-md-4">
+            <InputNumber class="form-control" @bind-Value="order.Rating" />
+        </div>
+        <!-- <ValidationMessage For="@(() => user.Emailid)" /> -->
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-danger" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+
+@code{
+    Order order = new Order();
+    async Task CreateOrder()
+    {
+        await service.PostAsJsonAsync("api/order", order);
+    }
+    protected async Task SaveOrder()
+    {
+        if (order.Id != 0)
+        {
+            await service.PutAsJsonAsync("api/order", order);
+        }
+        else
+        {
+            await service.PostAsJsonAsync("api/order", order);
+        }
+        Cancel();
+    }
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/order");
+    }
+}
