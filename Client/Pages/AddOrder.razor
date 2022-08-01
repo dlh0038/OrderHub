@@ -24,9 +24,23 @@
         <!-- <ValidationMessage For="@(() => user.Cellnumber)" /> -->
     </div>
     <div class="mb-3">
-        <label for="Quantity" class="form-label">Rating</label>
+        <label for="Rating" class="form-label">Rating</label>
         <div class="col-md-4">
             <InputNumber class="form-control" @bind-Value="order.Rating" />
+        </div>
+        <!-- <ValidationMessage For="@(() => user.Emailid)" /> -->
+    </div>
+    <div class="mb-3">
+        <label for="UserID" class="form-label">User ID</label>
+        <div class="col-md-4">
+            <InputNumber class="form-control" @bind-Value="order.UserID" />
+        </div>
+        <!-- <ValidationMessage For="@(() => user.Emailid)" /> -->
+    </div>
+    <div class="mb-3">
+        <label for="RestaurantID" class="form-label">Restaurant ID</label>
+        <div class="col-md-4">
+            <InputNumber class="form-control" @bind-Value="order.RestaurantID" />
         </div>
         <!-- <ValidationMessage For="@(() => user.Emailid)" /> -->
     </div>
